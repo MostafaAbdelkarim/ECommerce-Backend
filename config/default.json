@@ -1,0 +1,5 @@
+{
+    "name": "E-Commerce Backend API - Default",
+    "jwtPrivateKey": "eCommerce_jwtPrivateKey_snbfckjasbfkjlbsaljfkbljasbfkljsabfkljsabjhdgvskjahfdgvkhsavfkhsavfkh",
+    "RemoteDB": "mongodb+srv://mostafaeldahshan:vyc7sLy7tqyxD7n0@cluster0.dfc655s.mongodb.net/?retryWrites=true&w=majority"
+}
