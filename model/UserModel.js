@@ -5,7 +5,7 @@ const config = require('config');
 const userSchema = mongoose.Schema({
     username: {
         type: String,
-        required: [true, 'Pleae enter your username'],
+        required: [true, 'Pleae enter your email'],
         minlength: 3,
         maxlength: 50,
         unique: true
