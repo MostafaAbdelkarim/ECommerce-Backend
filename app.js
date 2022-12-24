@@ -20,6 +20,10 @@ app.use('/api/users', userRouter);
 app.use('/api/products', productRouter);
 app.use(handleError);
 
+app.get('/', (req, res) => {
+    res.send('Hello World to ECommerce');
+});
+
 console.log(`Application name: ${config.get('name')}`);
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
