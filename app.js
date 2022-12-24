@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const userRouter = require('./router/UserRoute');
 const productRouter = require('./router/ProductRoute');
 const {handleError} = require('./exceptions/ExceptionHandler')
-require("./config/db");
+require("./config/DB.js");
 
 
 if(!config.has('jwtPrivateKey')){
