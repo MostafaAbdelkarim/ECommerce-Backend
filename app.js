@@ -26,6 +26,7 @@ app.get('/', (req, res) => {
 
 console.log(`Application name: ${config.get('name')}`);
 const port = process.env.PORT || 3000;
+const host = process.env.HOST || '0.0.0.0';
 app.listen(port, () => {
-    console.log(`Server started on port ${port}..`)
+    console.log(`Server started on host: ${host} port ${port}..`)
 });
