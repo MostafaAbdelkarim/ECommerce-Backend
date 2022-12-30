@@ -113,6 +113,17 @@ const buyProduct = async (req, res) => {
     }, {new: true});
     
     return {user, product, totalCost};
+};
+
+const getCurrentUserUsingToken = async (req, res) => {
+    const authHeader = req.headers.authorization;
+    if(authHeader === undefined) throw new Unautorized('Unauthorized');
+    else{
+        const token = authHeader.split(' ')[1];
+        const userPayload = decode(token);
+        const user = await User.findById(userPayload._id);
+        return user;
+    }
 }
 
 const checkIfUserIsNotSeller = (req, res) => {
@@ -136,5 +147,6 @@ module.exports = {
     loginUser, 
     depositeAmount,
     resetAmount,
-    buyProduct
+    buyProduct, 
+    getCurrentUserUsingToken
 };

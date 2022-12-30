@@ -101,7 +101,16 @@ const buyProduct = async (req, res, next) => {
     } catch (error) {
         next(error);
     }
-}
+};
+
+const getCurrentUserUsingToken = async (req, res, next) => {
+    try {
+        const user = await UserService.getCurrentUserUsingToken(req);
+        return res.status(200).send(user);
+    }catch (error) {
+        next(error)
+    }
+};
 
 module.exports = {
     createUser, 
@@ -113,5 +122,6 @@ module.exports = {
     userLogout, 
     depositeAmount,
     resetAmount,
-    buyProduct
+    buyProduct,
+    getCurrentUserUsingToken
 };

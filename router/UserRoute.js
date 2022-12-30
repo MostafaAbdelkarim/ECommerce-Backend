@@ -29,5 +29,6 @@ router.put('/:id', jwtAuth.authUsingHeader, UserController.updateUserById);
 
 router.delete('/:id', jwtAuth.authUsingHeader, UserController.deleteUserById);
 
+router.get('/get_current_user', jwtAuth.authUsingHeader, UserController.getCurrentUserUsingToken);
 
 module.exports = router;
