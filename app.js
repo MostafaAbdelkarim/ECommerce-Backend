@@ -8,7 +8,6 @@ const productRouter = require('./router/ProductRoute');
 const {handleError} = require('./exceptions/ExceptionHandler')
 require("./config/DB.js");
 
-
 if(!config.has('jwtPrivateKey')){
     console.error('FATAL ERROR WITH jwtPrivateKey');
     process.exit(1);
@@ -29,6 +28,7 @@ app.get('/', (req, res) => {
 console.log(`Application name: ${config.get('name')}`);
 const port = process.env.PORT || 3000;
 const host = process.env.HOST || '0.0.0.0';
+
 app.listen(port, () => {
     console.log(`Server started on Host: ${host} and Port: ${port}.. ✈🔥`)
 });

@@ -42,7 +42,7 @@ const updateProductById = async (req, res) =>{
 };
 
 const deleteProductById = async (req, res) =>{
-    let product = await Product.findByIdAndRemove(req.params.id);
+    let product = await Product.findByIdAndDelete(req.params.id);
     if(!_.isEmpty(product)) throw new NotFoundException('Error');
     else return true;
 };

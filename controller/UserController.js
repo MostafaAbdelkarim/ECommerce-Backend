@@ -1,12 +1,16 @@
 const UserService = require('../service/UserService');
+const BaseResponse = require('../DTO/response/BaseResponse');
+const pino = require('../config/Logger');
 const _ = require('lodash');
 
 
 const createUser = async (req, res, next) => {
     try {
         const user = await UserService.createUser(req.body);
-        return res.status(201).send(_.pick(user, ['_id', 'username', 'role']));
+        
+        return BaseResponse(res, _.pick(user, ['_id', 'username', 'role']), 201);
     } catch (error) {
+        pino.error(`user: ${req.body.username} - ${error}`);
         next(error);
     }
 };
@@ -14,7 +18,8 @@ const createUser = async (req, res, next) => {
 const getAllUsers = async (req, res, next) => {
     try{
         const user = await UserService.getAllUsers();
-        res.status(200).send(user);
+        pino.info("")
+        return BaseResponse(res, user);
     }
     catch(error){
         next(error);
@@ -24,7 +29,7 @@ const getAllUsers = async (req, res, next) => {
 const getUserById = async (req, res, next) => {
     try{
         const user = await UserService.getUserById(req.params.id);
-        res.status(200).send(user);
+        return BaseResponse(res, user);
     }
     catch(error){
         next(error);
@@ -34,7 +39,7 @@ const getUserById = async (req, res, next) => {
 const updateUserById = async (req, res, next) => {
     try{
         const user = result = await UserService.updateUserById(req);
-        res.status(200).send(user);
+        return BaseResponse(res, user);
     }
     catch(error){
         next(error);
@@ -44,7 +49,7 @@ const updateUserById = async (req, res, next) => {
 const deleteUserById = async (req, res, next) => {
     try{
         const user =  result = await UserService.deleteUserById(req);
-        res.status(200).send(user);
+        return BaseResponse(res, user, 204);
     }
     catch(error){
         next(error);
@@ -54,7 +59,7 @@ const deleteUserById = async (req, res, next) => {
 const loginUser = async (req, res, next) => {
     try{
         const result = {user, token} = await UserService.loginUser(req.body);
-        return res.status(200).send({'Username': `${user.username}`, 'Token': result.token});
+        return BaseResponse(res, {'Username': `${user.username}`, 'Token': result.token});
     }
     catch (error){
         next(error);
@@ -66,7 +71,7 @@ const userLogout = async (req, res, next) => {
         res.cookie('jwtToken', "", {maxAge: 1});
         res.clearCookie('jwtToken');
         res.removeHeader('Authorization');
-        res.status(200).send('Logout Success');
+        return BaseResponse(res, "Logout Successfull");
     }
     catch (error){
         next(error);
@@ -76,7 +81,7 @@ const userLogout = async (req, res, next) => {
 const depositeAmount = async (req, res, next) => {
     try {
         const {user} = await UserService.depositeAmount(req);
-        return res.status(200).send({'Username': `${user.username}`, 'Amount': `${user.deposite}`});
+        return BaseResponse(res, {'Username': `${user.username}`, 'Amount': `${user.deposite}`});
     } catch (error) {
        next(error);
     }
@@ -85,7 +90,7 @@ const depositeAmount = async (req, res, next) => {
 const resetAmount = async (req, res, next) => {
     try {
         const {user} = await UserService.resetAmount(req);
-        return res.status(200).send({'Username': `${user.username}`, 'Amount': `${user.deposite}`});
+        return BaseResponse(res, {'Username': `${user.username}`, 'Amount': `${user.deposite}`});
     } catch (error) {
         next(error);
     }
@@ -94,7 +99,7 @@ const resetAmount = async (req, res, next) => {
 const buyProduct = async (req, res, next) => {
     try {
         const result = {user, product, totalCost} = await UserService.buyProduct(req);
-        return res.status(200).send({
+        return BaseResponse(res, {
             'Total spent': `${totalCost}`, 
             'Product': `${result.product.productName}`, 
             'Current Available amount': `${result.user.deposite}`});
@@ -106,7 +111,7 @@ const buyProduct = async (req, res, next) => {
 const getCurrentUserUsingToken = async (req, res, next) => {
     try {
         const user = await UserService.getCurrentUserUsingToken(req);
-        return res.status(200).send(user);
+        return BaseResponse(res, user);
     }catch (error) {
         next(error)
     }
