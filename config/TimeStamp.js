@@ -1,13 +1,15 @@
-const dateObject = new Date();
-const date = (`0${dateObject.getDate()}`).slice(-2);
-const month = (`0${dateObject.getMonth() + 1}`).slice(-2);
-const year = dateObject.getFullYear();
-const hours = dateObject.getHours();
-const minutes = dateObject.getMinutes();
-const seconds = dateObject.getSeconds();
-
-const currentTimeStamp = `${date}/${month}/${year} - ${hours}:${minutes}:${seconds}`;
+function getCurrentTimeStamp() {
+    const dateObject = new Date();
+    const date = (`0${dateObject.getDate()}`).slice(-2);
+    const month = (`0${dateObject.getMonth() + 1}`).slice(-2);
+    const year = dateObject.getFullYear();
+    const hours = dateObject.getHours();
+    const minutes = dateObject.getMinutes();
+    const seconds = dateObject.getSeconds();
+    const currentTimeStamp = `${date}/${month}/${year} - ${hours}:${minutes}:${seconds}`;
+    return currentTimeStamp;
+}
 
 module.exports = {
-    currentTimeStamp
+    getCurrentTimeStamp
 };
