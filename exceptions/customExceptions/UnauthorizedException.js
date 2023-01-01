@@ -1,6 +1,6 @@
 const ApplicationExceptions = require('../ApplicationExceptions'); 
 class Unautorized extends ApplicationExceptions {
-    constructor(message) {
+    constructor(message = 'Unauthorized') {
       super(message, 401);
     }
   };

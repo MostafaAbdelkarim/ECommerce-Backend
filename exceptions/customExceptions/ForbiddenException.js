@@ -1,6 +1,6 @@
 const ApplicationExceptions = require('../ApplicationExceptions'); 
 class Forbidden extends ApplicationExceptions {
-    constructor(message) {
+    constructor(message = 'Forbidden') {
       super(message, 403);
     }
   };
