@@ -1,6 +1,6 @@
 const ApplicationExceptions = require('../ApplicationExceptions'); 
 class UserAlreadyRegistered extends ApplicationExceptions {
-    constructor(message) {
+    constructor(message = 'User already registered') {
       super(message, 400);
     }
   };
