@@ -6,7 +6,7 @@ const hours = dateObject.getHours();
 const minutes = dateObject.getMinutes();
 const seconds = dateObject.getSeconds();
 
-const currentTimeStamp = `[${date}/${month}/${year} - ${hours}:${minutes}:${seconds}]`;
+const currentTimeStamp = `${date}/${month}/${year} - ${hours}:${minutes}:${seconds}`;
 
 module.exports = {
     currentTimeStamp

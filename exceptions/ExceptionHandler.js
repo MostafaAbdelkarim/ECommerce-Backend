@@ -1,9 +1,9 @@
-const pino = require('../config/Logger');
+const logger = require('../config/Logger');
 const {currentTimeStamp} = require('../config/TimeStamp');
 
 const handleError = (err,req,res,next) => {
-  pino.error(`${currentTimeStamp} ${req.method} ${req.protocol}://${req.hostname}${req.originalUrl} - IP: ${req.ip} - AGENT: ${req.get('User-Agent')}`)
-  pino.error(`${currentTimeStamp} STATUS: ${err.status} - STATUSCODE: ${err.statusCode} - MESSAGE: ${err.message}`)
+  const userIp = req.socket.remoteAddress || req.headers['x-forwarded-for'] || req.ip;
+  logger.error(`${req.method} ${req.originalUrl} - IP: ${userIp} - AGENT: ${req.get('User-Agent')}`+` STATUS: ${err.status} - STATUSCODE: ${err.statusCode} - MESSAGE: ${err.message}`);
   res.status(err.statusCode || 500).send({ 
     timestamp: currentTimeStamp, 
     statusCode: err.statusCode || 500, 

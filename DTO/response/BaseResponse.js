@@ -1,9 +1,9 @@
-const pino = require('../../config/Logger');
+const logger = require('../../config/Logger');
 const {currentTimeStamp} = require('../../config/TimeStamp');
 
 function BaseResponse (req, res, body, statusCode=200, status="Success") {
-
-    pino.info(`${currentTimeStamp} ${req.method} ${req.protocol}://${req.hostname}${req.originalUrl} - IP: ${req.ip} - AGENT: ${req.get('User-Agent')}`);
+    const userIp = req.socket.remoteAddress || req.headers['x-forwarded-for'] || req.ip;
+    logger.info(`${req.method} ${req.originalUrl} - IP: ${userIp} - AGENT: ${req.get('User-Agent')} - STATUS: ${status} - STATUSCODE: ${statusCode}`);
     return res.status(statusCode).send(
         {
             timeStamp: currentTimeStamp, 

@@ -17,6 +17,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
+app.set('trust proxy', true);
 app.use('/api/users', userRouter);
 app.use('/api/products', productRouter);
 app.use(handleError);
